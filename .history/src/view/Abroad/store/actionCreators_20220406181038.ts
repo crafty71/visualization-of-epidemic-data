@@ -1,0 +1,26 @@
+import * as actionTypes from "./constants";
+
+import { getWomWorld } from "@/service/abroadApi/index";
+
+// const changeDomesticDataAction = (res: { data: { data: any } }) => ({
+//   type: actionTypes.CHANGE_STATIC_GRADE,
+//   domesticDatas: res.data.data,
+// });
+// export const getDomesticDataAction = () => {
+//   return (dispatch: (arg0: { type: string; domesticDatas: any }) => void) => {
+//     demesticDataRequest().then((res) => {
+//       dispatch(changeDomesticDataAction(res));
+//     });
+//   };
+// };
+
+const changeWomWorldAction = (res: any) => ({
+  type: actionTypes.CHANGE_WOW_WORLD,
+  WomWorldData: res,
+});
+
+export const WomWorldDataAction = () => {
+  return (dispatch) => {
+    getWomWorld().then((res) => {});
+  };
+};

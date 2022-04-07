@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import { defaultState } from "../../store/store";
+import { defaultState } from "@/store/index.ts";
 
 import { Table } from "antd";
 
@@ -26,6 +26,37 @@ const EpidemicProvience = memo(() => {
     // size: 'small'
     simple: true,
   };
+
+  const colums = [
+    {
+      title: "城市",
+    },
+    {
+      title: "省份",
+      dataIndex: "city",
+      key: "city",
+    },
+    {
+      title: "累计确诊",
+      dataIndex: "confirm",
+      key: "confirm",
+    },
+    {
+      title: "今天新增确诊",
+      dataIndex: "confirmAdd",
+      key: "confirmAdd",
+    },
+    {
+      title: "康复",
+      dataIndex: "heal",
+      key: "heal",
+    },
+    {
+      title: "死亡",
+      dataIndex: "dead",
+      key: "dead",
+    },
+  ];
 
   return (
     <div>

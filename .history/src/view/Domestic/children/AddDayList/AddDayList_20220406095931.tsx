@@ -1,0 +1,56 @@
+import { memo, useEffect } from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+
+// api
+import { getchinaDayAddListAvtion } from "../../store/actionCreators";
+import LineCharts from "@/component/echarts/lineCharts";
+
+const chinaDayAddList = memo(() => {
+  const { chinaDayAddList } = useSelector(
+    (defaultState: any) => ({
+      chinaDayAddList: defaultState.getIn(["demestic", "chinaDayAddList"]),
+    }),
+    shallowEqual
+  );
+
+  /* <Column title="城市" dataIndex="city" key="city" />
+        <Column title="省份" dataIndex="province" key="province" />
+        <Column title="累计确诊" dataIndex="confirm" key="confirm" />
+        <Column title="今天新增确诊" dataIndex="confirmAdd" key="confirmAdd" />
+        <Column title="康复" dataIndex="heal" key="heal" />
+        <Column title="死亡" dataIndex="dead" key="dead" />
+        <Column title="更新日期" dataIndex="sdate" key="sdate" />
+        <Column title="风险区域" dataIndex="grade" key="grade" /> */
+
+  const chinaDayAddListTempIs =
+    chinaDayAddList.length === 0 ? [] : chinaDayAddList;
+
+  const chinaDayAddListTemp: any = [];
+
+  for (const item of chinaDayAddListTempIs) {
+    const Temp = {
+      date: item.date,
+      现有确诊: item.confirm || 0,
+      新增确诊: item.localConfirmadd,
+      新增无症状感染者: item.infect,
+      新增境外输入: item.importedCase,
+      康复率: item.healRate,
+      新增死亡: item.dead,
+    };
+    chinaDayAddListTemp.push(Temp);
+  }
+
+  // hocks
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getchinaDayAddListAvtion());
+  }, [dispatch]);
+
+  return (
+    <div style={{ paddingTop: "30px" }}>
+      <LineCharts dataList={chinaDayAddListTemp} />
+    </div>
+  );
+});
+
+export default chinaDayAddList;

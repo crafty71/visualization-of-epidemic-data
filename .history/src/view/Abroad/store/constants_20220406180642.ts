@@ -1,0 +1,2 @@
+export const CHANGE_STATIC_GRADE = "home/CHANGE_STATIC_GRADE";
+export const CHANGE_WOW_WORLD = "abroad/CHANGE_WOW_WORLD";
